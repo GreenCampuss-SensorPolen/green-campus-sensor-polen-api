@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_GUARD, DiscoveryModule } from '@nestjs/core';
+import { HttpModule } from '@nestjs/axios';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -12,11 +13,13 @@ import { ReadingModule } from './modules/technical/reading/reading.module';
 import { NotificationModule } from './modules/user/notification/notification.module';
 import { UserModule } from './modules/user/userData/user.module';
 import { DatabaseProvider } from './providers/database.provider';
+import { PredictionController } from './predictions/prediction.controller';
 
 @Module({
   imports: [
     // Config
     ConfigModule.forRoot({ isGlobal: true }),
+    HttpModule,
     AuthModule,
     DiscoveryModule,
     DatabaseProvider,
@@ -26,7 +29,7 @@ import { DatabaseProvider } from './providers/database.provider';
     NodeModule,
     ReadingModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, PredictionController],
   providers: [
     { provide: APP_GUARD, useClass: CombinedAuthGuard },
     { provide: APP_GUARD, useClass: RolesGuard },

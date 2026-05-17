@@ -11,11 +11,11 @@ async function crearAdmin() {
         'Authorization': 'Bearer super-secreto-admin' 
       },
       body: JSON.stringify({
-        email: 'tecnico@greencampus.com',
+        email: 'directivo@greencampus.com',
         password: 'GreenCampus2026!', // <-- Contraseña fuerte (Mayúscula, número y símbolo)
-        firstName: 'Tecnico',           // <-- Ahora sí, nombre
-        lastName: 'Mantenimiento',        // <-- Y apellido
-        role: 'TECNICO'             // <-- Rol oficial
+        firstName: 'Directivo',           // <-- Ahora sí, nombre
+        lastName: 'Principal',        // <-- Y apellido
+        role: 'DIRECTIVO'             // <-- Rol oficial
       })
     });
     
@@ -24,7 +24,7 @@ async function crearAdmin() {
     
     if (status === 200 || status === 201) {
       console.log("✅ ¡Usuario creado con éxito!");
-      console.log("Ya puedes entrar en la web con tecnico@greencampus.com y GreenCampus2026!");
+      console.log("Ya puedes entrar en la web con directivo@greencampus.com y GreenCampus2026!");
     } else {
       console.error(`❌ Falló la creación (Error ${status}):`);
       console.error(data);

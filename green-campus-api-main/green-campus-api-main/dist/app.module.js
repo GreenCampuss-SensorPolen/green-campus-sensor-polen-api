@@ -14,6 +14,7 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const core_1 = require("@nestjs/core");
+const axios_1 = require("@nestjs/axios");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const auth_module_1 = require("./auth/auth.module");
@@ -24,6 +25,7 @@ const reading_module_1 = require("./modules/technical/reading/reading.module");
 const notification_module_1 = require("./modules/user/notification/notification.module");
 const user_module_1 = require("./modules/user/userData/user.module");
 const database_provider_1 = require("./providers/database.provider");
+const prediction_controller_1 = require("./predictions/prediction.controller");
 let AppModule = class AppModule {
     static { AppModule_1 = this; }
     configService;
@@ -38,6 +40,7 @@ exports.AppModule = AppModule = AppModule_1 = __decorate([
     (0, common_1.Module)({
         imports: [
             config_1.ConfigModule.forRoot({ isGlobal: true }),
+            axios_1.HttpModule,
             auth_module_1.AuthModule,
             core_1.DiscoveryModule,
             database_provider_1.DatabaseProvider,
@@ -46,7 +49,7 @@ exports.AppModule = AppModule = AppModule_1 = __decorate([
             node_module_1.NodeModule,
             reading_module_1.ReadingModule,
         ],
-        controllers: [app_controller_1.AppController],
+        controllers: [app_controller_1.AppController, prediction_controller_1.PredictionController],
         providers: [
             { provide: core_1.APP_GUARD, useClass: combined_auth_guard_1.CombinedAuthGuard },
             { provide: core_1.APP_GUARD, useClass: roles_guard_1.RolesGuard },
